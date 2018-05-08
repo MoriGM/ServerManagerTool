@@ -1,0 +1,8 @@
+name: ServerManagerTool
+version: 0.0.0
+author: MoriGM
+descrption: Manager your Server
+
+main: de.morigm.smt.Main
+
+commands:
