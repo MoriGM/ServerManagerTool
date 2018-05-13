@@ -1,6 +1,5 @@
 package de.morigm.smt.source;
 
-import de.morigm.smt.Main;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,7 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.apache.commons.io.IOUtils;
+
+import de.morigm.smt.Main;
 
 
 public class SourceManager {
@@ -183,12 +185,17 @@ public class SourceManager {
         }
     }
     
+    public void update()
+    {
+    	Main.getInstance().getSourceFileLoader().load();
+    }
+    
     /*
         0: Okay
         1: 
         2: 
     */
-    public int update()
+    public int upgrade()
     {
         //for(String s : Main.getInstance().getPluginsFileManager().getPlugins())
             for(SourceFolder folder : Main.getInstance().getSourceFileLoader().getFolder())

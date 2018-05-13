@@ -48,7 +48,7 @@ public class Main extends JavaPlugin
         this.sourceFileLoader.load();
         this.sourceManager = new SourceManager();
         if(getPluginConfiguration().auto_update)
-            this.sourceManager.update();
+            this.sourceManager.upgrade();
         Bukkit.getConsoleSender().sendMessage(ChatText.prefix + language.text("plugin.start"));
     }
 

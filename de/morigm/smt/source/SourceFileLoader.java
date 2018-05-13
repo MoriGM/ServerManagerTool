@@ -11,10 +11,11 @@ import java.util.List;
 
 public class SourceFileLoader 
 {
-    List<SourceFolder> folder = new ArrayList<>();
+    private List<SourceFolder> folder = new ArrayList<>();
     
     public void load()
     {
+    	folder.clear();
         try 
         {
             for(SourceData sc : Main.getInstance().getSourceListManager().getSources())
