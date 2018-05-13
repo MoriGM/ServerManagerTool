@@ -49,9 +49,6 @@ public class Main extends JavaPlugin
         this.sourceManager = new SourceManager();
         if(getPluginConfiguration().auto_update)
             this.sourceManager.upgrade();
-        this.sourceManager.remove("test");
-        this.sourceManager.remove("testlib");
-        this.sourceManager.remove("libtest");
         Bukkit.getConsoleSender().sendMessage(ChatText.prefix + language.text("plugin.start"));
     }
 
