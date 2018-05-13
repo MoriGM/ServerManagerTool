@@ -194,7 +194,7 @@ public class SourceManager {
     {
         if(Main.getInstance().getPluginsFileManager().conatinsPlugin(s))
         {
-            File f = new File(".plugins/" + Main.getInstance().getPluginsFileManager().getFullName(s));
+            File f = new File("./plugins/" + Main.getInstance().getPluginsFileManager().getFullName(s));
             if(f.exists())
                 f.delete();
             Main.getInstance().getPluginsFileManager().removePlugin(s);
