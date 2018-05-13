@@ -20,6 +20,9 @@ import de.morigm.smt.Main;
 public class SourceManager {
     
     /*
+    	Install a Plugin and all Libraries
+    	
+    	
         0: Ok
         1: Is installed
         2: Connection Error
@@ -74,6 +77,10 @@ public class SourceManager {
         return 0;
     }
     
+    
+    /*
+     	Check for an Update
+     */
     public boolean check(String s,List<String> install)
     {
         for(SourceFolder folder : Main.getInstance().getSourceFileLoader().getFolder())
@@ -120,6 +127,9 @@ public class SourceManager {
     }
     
     /*
+       	Only install plugin without the libraries
+        
+        
         0: Ok
         1: Is installed
         2: Connection Error
@@ -166,6 +176,9 @@ public class SourceManager {
         return 4;
     }
     /*
+       	Remove the Plugin
+        
+        
         0: OK
         1: Not installed
     */
@@ -185,12 +198,18 @@ public class SourceManager {
         }
     }
     
+    /*
+     	Update the SourceFils
+     */
     public void update()
     {
     	Main.getInstance().getSourceFileLoader().load();
     }
     
     /*
+       	Upgrade all Plugins
+        
+        
         0: Okay
         1: 
         2: 
