@@ -16,7 +16,7 @@ public class DowloadHelper {
     
     public InputStream getDownloadStream(String s)
     {
-        String uri = s.replaceAll("::/", " ").split(" ")[0];
+        String uri = s.replaceAll("://", " ").split(" ")[0];
         if(!downloaders.containsKey(uri))
             return null;
         return downloaders.get(uri).getInput(s);

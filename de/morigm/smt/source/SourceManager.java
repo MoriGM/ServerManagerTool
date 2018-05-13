@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,6 +16,7 @@ import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
 
 import de.morigm.smt.Main;
+import de.morigm.smt.helper.URLHelper;
 
 
 public class SourceManager {
@@ -56,9 +56,9 @@ public class SourceManager {
                         if(file.isEmpty())
                            return 3;
                         folders.add(s);
-                        URL url = new URL(folder.website + folder.name + "/libs");
-                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                        if(con.getResponseCode() == HttpURLConnection.HTTP_OK)
+                        //URL url = new URL(folder.website + folder.name + "/libs");
+                        //HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        if(URLHelper.getResponseCode(folder.website + folder.name + "/libs") == HttpURLConnection.HTTP_OK)
                         {
                         	reader = new BufferedReader(new InputStreamReader(Main.getInstance().getDowloadHelper().getDownloadStream(folder.website + folder.name + "/libs")));
                             while(reader.ready())
@@ -110,17 +110,20 @@ public class SourceManager {
                         if(file.isEmpty())
                            return false;
                         install.add(s);
-                        //url = new URL(folder.website + folder.name + "/libs");
-                        //con = (HttpURLConnection) url.openConnection();
-                        reader = new BufferedReader(new InputStreamReader(Main.getInstance().getDowloadHelper().getDownloadStream(folder.website + folder.name + "/libs")));
-                        while(reader.ready())
+                        //URL url = new URL(folder.website + folder.name + "/libs");
+                        //HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        if(URLHelper.getResponseCode(folder.website + folder.name + "/libs") == HttpURLConnection.HTTP_OK)
                         {
-                            String text = reader.readLine();
-                            boolean b = check(text,install);
-                            if(!b)
-                                return false;
+                        	reader = new BufferedReader(new InputStreamReader(Main.getInstance().getDowloadHelper().getDownloadStream(folder.website + folder.name + "/libs")));
+                            while(reader.ready())
+                            {
+                                String text = reader.readLine();
+                                boolean b = check(text,install);
+                                if(!b)
+                                    return false;
+                            }
+                            return true;
                         }
-                        return true;
                     } 
                     catch (IOException ex) {
                         Logger.getLogger(SourceManager.class.getName()).log(Level.SEVERE, null, ex);
