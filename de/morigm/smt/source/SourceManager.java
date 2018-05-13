@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -54,15 +56,18 @@ public class SourceManager {
                         if(file.isEmpty())
                            return 3;
                         folders.add(s);
-                        //url = new URL(folder.website + folder.name + "/libs");
-                        //con = (HttpURLConnection) url.openConnection();
-                        reader = new BufferedReader(new InputStreamReader(Main.getInstance().getDowloadHelper().getDownloadStream(folder.website + folder.name + "/libs")));
-                        while(reader.ready())
+                        URL url = new URL(folder.website + folder.name + "/libs");
+                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        if(con.getResponseCode() == HttpURLConnection.HTTP_OK)
                         {
-                            String text = reader.readLine();
-                            boolean b = check(text,folders);
-                            if(!b)
-                                return 4;
+                        	reader = new BufferedReader(new InputStreamReader(Main.getInstance().getDowloadHelper().getDownloadStream(folder.website + folder.name + "/libs")));
+                            while(reader.ready())
+                            {
+                                String text = reader.readLine();
+                                boolean b = check(text,folders);
+                                if(!b)
+                                    return 4;
+                            }
                         }
                         for(String in : folders)
                             download(in);
