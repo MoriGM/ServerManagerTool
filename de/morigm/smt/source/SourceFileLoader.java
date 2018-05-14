@@ -1,13 +1,12 @@
 package de.morigm.smt.source;
 
-import de.morigm.smt.Main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import de.morigm.smt.Main;
 
 public class SourceFileLoader 
 {
@@ -20,9 +19,7 @@ public class SourceFileLoader
         {
             for(SourceData sc : Main.getInstance().getSourceListManager().getSources())
             {
-                URL url = new URL(sc.getConnection() + "list");
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(Main.getInstance().getDowloadHelper().getDownloadStream(sc.getConnection() + "list")));
                 while(reader.ready())
                 {
                     String s = reader.readLine();
